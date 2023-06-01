@@ -21,6 +21,22 @@ class Config(object):
         if not os.path.exists(self.CFG_WORKING_PATH):
             os.makedirs(self.CFG_WORKING_PATH)
 
+        self.PG_DB_HOST = yaml_config['databases']['postgres']['host']
+        self.PG_DB_PORT = yaml_config['databases']['postgres']['port']
+        self.PG_DB_SSLMODE = yaml_config['databases']['postgres']['sslmode']
+        self.PG_DB_DBNAME = yaml_config['databases']['postgres']['dbname']
+        self.PG_DB_USER = yaml_config['databases']['postgres']['user']
+        self.PG_DB_TARGET_SESSION_ATTRS = yaml_config['databases']['postgres']['target_session_attrs']
+        self.PG_DB_PWD = os.environ[yaml_config['databases']['postgres']['password']] 
+        self.PG_DB_CONNECTION_STRING = f"""
+            host={self.PG_DB_HOST}
+            port={self.PG_DB_PORT}
+            sslmode={self.PG_DB_SSLMODE}
+            dbname={self.PG_DB_DBNAME}
+            user={self.PG_DB_USER}
+            password={self.PG_DB_PWD}
+            target_session_attrs={self.PG_DB_TARGET_SESSION_ATTRS}
+            """
 
 if __name__ == '__main__':
 
