@@ -8,7 +8,7 @@ from PySide6.QtGui import QAction, QIcon, QKeySequence
 from PySide6.QtWidgets import (QApplication, QFileDialog, QMainWindow,
         QMdiArea, QMessageBox, QTextEdit)
 
-import src.mdi_rc as mdi_rc
+import mdi_rc as mdi_rc
 
 
 
