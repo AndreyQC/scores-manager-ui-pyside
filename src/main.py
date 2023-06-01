@@ -11,6 +11,7 @@ from PySide6.QtWidgets import (QApplication, QFileDialog, QMainWindow,
 import mdi_rc as mdi_rc
 
 import config.smgr_config as cfg
+import dbcontext.dbcontext as db
 
 
 
@@ -453,14 +454,14 @@ if __name__ == '__main__':
 
 
 
-    argument_parser = ArgumentParser(description='MDI Example',
-                                     formatter_class=RawTextHelpFormatter)
-    argument_parser.add_argument("files", help="Files",
-                                 nargs='*', type=str)
+    argument_parser = ArgumentParser(description='MDI Example', formatter_class=RawTextHelpFormatter)
+    argument_parser.add_argument("files", help="Files", nargs='*', type=str)
     options = argument_parser.parse_args()
 
     smgr_config = cfg.Config(r"src\config\smgr_config.yaml")
-    print(smgr_config.CFG_APPSHORTNAME)
+    # AQC
+    dbcontext = db.DBcontext(smgr_config) 
+    print(smgr_config.PG_DB_CONNECTION_STRING)
 
     app = QApplication(sys.argv)
     main_win = MainWindow()

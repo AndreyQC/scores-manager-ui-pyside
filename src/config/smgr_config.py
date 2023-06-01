@@ -41,4 +41,4 @@ class Config(object):
 if __name__ == '__main__':
 
     config = Config(r"src\config\smgr_config.yaml")
-    print(config.CFG_APPSHORTNAME)
+    print(config.PG_DB_CONNECTION_STRING)
