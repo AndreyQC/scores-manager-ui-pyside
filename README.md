@@ -1,0 +1,1 @@
+# scores-manager-ui-pyside
