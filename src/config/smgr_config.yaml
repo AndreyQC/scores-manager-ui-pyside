@@ -4,7 +4,6 @@ logLevel: WARN
 authors:
   - Andrey Potapov
   - Sergei Boikov  
-  - Miroslav Potapov
 
 paths:
   workingpath: 'D:\-=Video convertation=-\temp'
@@ -15,14 +14,14 @@ flags:
 
 databases:
   postgres:
-    host: rc1a-lsohunqdlnlwpe3j.mdb.yandexcloud.net
+    host: rc1a-yllcr299ehv5rd4a.mdb.yandexcloud.net
     port: 6432
     sslmode: verify-full
-    dbname: object-universe
-    user: andreyqc
-    username: user
+    dbname: ScoresManagerDB
+    user: mentor
+    username: mentor
     target_session_attrs: read-write    
-    password: WEB_FLASK_POSTGRES_DB_PWD
+    password: TODO #get from env variable 
 
 
   

@@ -6,11 +6,11 @@ from PySide6.QtCore import (QByteArray, QFile, QFileInfo, QSettings,
         QSaveFile, QTextStream, Qt, Slot)
 from PySide6.QtGui import QAction, QIcon, QKeySequence
 from PySide6.QtWidgets import (QApplication, QFileDialog, QMainWindow,
-        QMdiArea, QMessageBox, QTextEdit)
+        QMdiArea, QMessageBox, QTextEdit, QMdiSubWindow)
 
 import mdi_rc as mdi_rc
 
-
+import config.smgr_config as cfg
 
 
 
@@ -154,6 +154,18 @@ class MainWindow(QMainWindow):
             self.write_settings()
             event.accept()
 
+    # AQC #TODO
+    @Slot()
+    def create_mdi_window_ref_courses(self):
+        sub = QMdiSubWindow()
+        sub.windowTitle = "Справочник курсов"
+        
+        self._mdi_area.addSubWindow(sub)
+        sub.show()
+
+
+        return sub
+    
     @Slot()
     def new_file(self):
         child = self.create_mdi_child()
@@ -345,6 +357,13 @@ class MainWindow(QMainWindow):
         self._about_qt_act = QAction("About &Qt", self,
                 statusTip="Show the Qt library's About box",
                 triggered=QApplication.instance().aboutQt)
+        
+        # AQC
+        icon = QIcon.fromTheme("document-open", QIcon(':/images/open.png'))
+        self._open_ref_courses = QAction(icon, "Справочник курсов", self,
+                statusTip="Справочник курсов",
+                triggered=self.create_mdi_window_ref_courses)
+
 
     def create_menus(self):
         self._file_menu = self.menuBar().addMenu("&File")
@@ -362,11 +381,12 @@ class MainWindow(QMainWindow):
         self._edit_menu.addAction(self._copy_act)
         self._edit_menu.addAction(self._paste_act)
 
+        #AQC
+        self._reference_menu = self.menuBar().addMenu("Справочники")
+        self._reference_menu.addAction(self._open_ref_courses)
 
-        self._file_menu = self.menuBar().addMenu("Справочники")
-
-
-        self._file_menu = self.menuBar().addMenu("Журналы")
+        self._journal_menu = self.menuBar().addMenu("Журналы")
+        
 
         self._window_menu = self.menuBar().addMenu("&Window")
         self.update_window_menu()
@@ -429,11 +449,18 @@ class MainWindow(QMainWindow):
 
 
 if __name__ == '__main__':
+
+
+
+
     argument_parser = ArgumentParser(description='MDI Example',
                                      formatter_class=RawTextHelpFormatter)
     argument_parser.add_argument("files", help="Files",
                                  nargs='*', type=str)
     options = argument_parser.parse_args()
+
+    smgr_config = cfg.Config(r"src\config\smgr_config.yaml")
+    print(smgr_config.CFG_APPSHORTNAME)
 
     app = QApplication(sys.argv)
     main_win = MainWindow()
