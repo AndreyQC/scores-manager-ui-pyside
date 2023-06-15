@@ -127,6 +127,7 @@ class MdiChild(QTextEdit):
 
 
 class MainWindow(QMainWindow):
+
     def __init__(self):
         super().__init__()
 
@@ -166,6 +167,17 @@ class MainWindow(QMainWindow):
 
 
         return sub
+
+    # Fel 
+    def create_mdi_window_journal(self):
+        jour = QMdiSubWindow()
+        jour.windowTitle = "Журнал оценок"
+        
+        self._mdi_area.addSubWindow(jour)
+        jour.show()
+
+
+        return jour
     
     @Slot()
     def new_file(self):
@@ -364,6 +376,12 @@ class MainWindow(QMainWindow):
         self._open_ref_courses = QAction(icon, "Справочник курсов", self,
                 statusTip="Справочник курсов",
                 triggered=self.create_mdi_window_ref_courses)
+        
+        # Fel
+        icon = QIcon.fromTheme("document-open", QIcon(':/images/open.png'))
+        self._open_ref_journal = QAction(icon, "Журнал оценок", self, 
+                statusTip = 'Журнал оценок',
+                triggered = self.create_mdi_window_journal)
 
 
     def create_menus(self):
@@ -386,8 +404,9 @@ class MainWindow(QMainWindow):
         self._reference_menu = self.menuBar().addMenu("Справочники")
         self._reference_menu.addAction(self._open_ref_courses)
 
+        # Fel
         self._journal_menu = self.menuBar().addMenu("Журналы")
-        
+        self._journal_menu.addAction(self._open_ref_journal)        
 
         self._window_menu = self.menuBar().addMenu("&Window")
         self.update_window_menu()
@@ -450,10 +469,6 @@ class MainWindow(QMainWindow):
 
 
 if __name__ == '__main__':
-
-
-
-
     argument_parser = ArgumentParser(description='MDI Example', formatter_class=RawTextHelpFormatter)
     argument_parser.add_argument("files", help="Files", nargs='*', type=str)
     options = argument_parser.parse_args()

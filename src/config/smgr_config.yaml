@@ -4,6 +4,7 @@ logLevel: WARN
 authors:
   - Andrey Potapov
   - Sergei Boikov  
+  - Miroslav Potapov
 
 paths:
   workingpath: 'D:\-=dump=-\smgr'
