@@ -163,6 +163,8 @@ class MainWindow(QMainWindow):
         sub.windowTitle = "Справочник курсов"
         
         self._mdi_area.addSubWindow(sub)
+        
+
         sub.show()
 
 
@@ -173,7 +175,11 @@ class MainWindow(QMainWindow):
         jour = QMdiSubWindow()
         jour.windowTitle = "Журнал оценок"
         
+        #  вот тут инициализация таблевью
+        
         self._mdi_area.addSubWindow(jour)
+
+        
         jour.show()
 
 
